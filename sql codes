@@ -1,0 +1,68 @@
+select SUM(total_price) as Total_revenue from pizza_sales
+817860.05083847
+select SUM(total_price)/count(distinct order_id) from pizza_sales
+38.3072623343546
+select SUM(quantity) from pizza_sales
+49574
+select count(distinct	order_id ) from pizza_sales
+21350
+select cast(sum(quantity) as decimal(10,2)) / cast(count(distinct order_id) as decimal (10,2)) from pizza_sales
+2.3219672131147
+select datename(dw,order_date) as order_day,count(distinct order_id) as Total_orders from pizza_sales group by datename(dw,order_date)
+Saturday	3158
+Wednesday	3024
+Monday	2794
+Sunday	2624
+Friday	3538
+Thursday	3239
+Tuesday	2973
+select DATENAME(month,order_date) as monthname , count(distinct order_id) from pizza_sales group by DATENAME(month,order_date)
+February	1685
+June	1773
+August	1841
+April	1799
+May	1853
+December	1680
+January	1845
+September	1661
+October	1646
+July	1935
+November	1792
+March	1840
+select pizza_category , sum(total_price) * 100 /(select sum(total_price) from pizza_sales) from pizza_sales group by pizza_category
+Classic	26.9059602306976
+Chicken	23.9551375322885
+Veggie	23.6825910258677
+Supreme	25.4563112111462
+select pizza_category , sum(total_price) * 100 /(select sum(total_price) from pizza_sales  where month(order_date)=1) from pizza_sales
+ where month(order_date)=1 group by pizza_category
+Classic	26.6779189176038
+Chicken	23.1952780348435
+Veggie	24.4370162489706
+Supreme	25.6897867985821
+select pizza_size , sum(total_price) * 100 /(select sum(total_price) from pizza_sales ) from pizza_sales
+ group by pizza_size
+L	45.8903330244889
+XXL	0.123077294254725
+M	30.492044420599
+XL	1.72107684995364
+S	21.7734684107037
+select top 5 pizza_name,sum(total_price) from pizza_sales group by pizza_name order by sum(total_price) desc
+The Thai Chicken Pizza	43434.25
+The Barbecue Chicken Pizza	42768
+The California Chicken Pizza	41409.5
+The Classic Deluxe Pizza	38180.5
+The Spicy Italian Pizza	34831.25
+select top 5 pizza_name,sum(total_price) from pizza_sales group by pizza_name order by sum(total_price)  
+The Brie Carre Pizza	11588.4998130798
+The Green Garden Pizza	13955.75
+The Spinach Supreme Pizza	15277.75
+The Mediterranean Pizza	15360.5
+The Spinach Pesto Pizza	15596
+select top 5 pizza_name,sum(quantity) from pizza_sales group by pizza_name order by sum(total_price)  
+The Brie Carre Pizza	490
+The Green Garden Pizza	997
+The Spinach Supreme Pizza	950
+The Mediterranean Pizza	934
+The Spinach Pesto Pizza	970
+
